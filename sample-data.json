@@ -1,0 +1,245 @@
+{
+  "version": "1.0",
+  "gebaeude": {
+    "anschrift": {
+      "strasse": "Musterstraße 123",
+      "plz": "12345",
+      "ort": "Musterstadt"
+    },
+    "eigentuemer": {
+      "name": "Max Mustermann",
+      "telefon": "+49 123 456789",
+      "email": "max.mustermann@example.com"
+    },
+    "baujahr": 1985,
+    "gebaeudetyp": "Einfamilienhaus",
+    "anzahlWohneinheiten": 1,
+    "wohnflaeche": 145.5,
+    "beheizteFlaeche": 125.0,
+    "anzahlGeschosse": 2,
+    "kellerVorhanden": true,
+    "dachgeschossAusbau": "teilweise"
+  },
+  "heizungssystem": {
+    "heizungsart": "Wärmepumpe",
+    "baujahr": 2020,
+    "nennleistung": 8.5,
+    "vorlauftemperatur": 35,
+    "ruecklauftemperatur": 28,
+    "systemtemperaturen": "35/28",
+    "auslegungsAussentemperatur": -12,
+    "raumtemperaturAuslegung": 20,
+    "nachtabsenkung": {
+      "aktiv": true,
+      "absenkung": 2
+    }
+  },
+  "raeume": [
+    {
+      "id": "eg-wohnzimmer",
+      "stockwerk": "Erdgeschoss",
+      "raumbezeichnung": "Wohnzimmer",
+      "raumnutzung": "Wohnen",
+      "raumgroesse_m2": 35.5,
+      "raumhoehe_m": 2.5,
+      "norm_innentemperatur_c": 21,
+      "berechneteHeizlast": 1250,
+      "heizkoerper": [
+        {
+          "Art": "Flachheizkörper",
+          "typ": "Typ 22",
+          "breite": 1600,
+          "hoehe": 600,
+          "leistungAuslegung": 1280,
+          "ventilvoreinstellung": 4
+        }
+      ],
+      "waende": [
+        {
+          "bezeichnung": "Außenwand Nord",
+          "typ": "Außenwand",
+          "flaeche": 12.5,
+          "uWert": 0.28
+        },
+        {
+          "bezeichnung": "Außenwand West",
+          "typ": "Außenwand",
+          "flaeche": 8.9,
+          "uWert": 0.28
+        }
+      ],
+      "fenster": [
+        {
+          "typ": "Kunststoff",
+          "verglasung": "3-fach Verglasung",
+          "uw_wert": 1.1,
+          "hoehe_m": 1.4,
+          "breite_m": 1.5,
+          "flaeche_m2": 2.1,
+          "beschreibung": "Fenster Nord"
+        },
+        {
+          "typ": "Kunststoff",
+          "verglasung": "3-fach Verglasung",
+          "uw_wert": 1.1,
+          "hoehe_m": 2.2,
+          "breite_m": 2.0,
+          "flaeche_m2": 4.4,
+          "beschreibung": "Terrassentür"
+        }
+      ]
+    },
+    {
+      "id": "eg-kueche",
+      "stockwerk": "Erdgeschoss",
+      "raumbezeichnung": "Küche",
+      "raumnutzung": "Küche",
+      "raumgroesse_m2": 18.2,
+      "raumhoehe_m": 2.5,
+      "norm_innentemperatur_c": 20,
+      "berechneteHeizlast": 580,
+      "heizkoerper": [
+        {
+          "Art": "Flachheizkörper",
+          "typ": "Typ 21",
+          "breite": 1000,
+          "hoehe": 600,
+          "leistungAuslegung": 600,
+          "ventilvoreinstellung": 3
+        }
+      ],
+      "waende": [
+        {
+          "bezeichnung": "Außenwand Ost",
+          "typ": "Außenwand",
+          "flaeche": 9.5,
+          "uWert": 0.28
+        }
+      ],
+      "fenster": [
+        {
+          "typ": "Kunststoff",
+          "verglasung": "3-fach Verglasung",
+          "uw_wert": 1.1,
+          "hoehe_m": 1.4,
+          "breite_m": 1.2,
+          "flaeche_m2": 1.68,
+          "beschreibung": "Fenster Ost"
+        }
+      ]
+    },
+    {
+      "id": "og-schlafzimmer",
+      "stockwerk": "Obergeschoss",
+      "raumbezeichnung": "Schlafzimmer",
+      "raumnutzung": "Schlafen",
+      "raumgroesse_m2": 22.0,
+      "raumhoehe_m": 2.4,
+      "norm_innentemperatur_c": 18,
+      "berechneteHeizlast": 680,
+      "heizkoerper": [
+        {
+          "Art": "Flachheizkörper",
+          "typ": "Typ 22",
+          "breite": 1200,
+          "hoehe": 600,
+          "leistungAuslegung": 700,
+          "ventilvoreinstellung": 3
+        }
+      ],
+      "waende": [
+        {
+          "bezeichnung": "Außenwand Süd",
+          "typ": "Außenwand",
+          "flaeche": 11.0,
+          "uWert": 0.28
+        },
+        {
+          "bezeichnung": "Dachschräge",
+          "typ": "Dach",
+          "flaeche": 8.5,
+          "uWert": 0.20
+        }
+      ],
+      "fenster": [
+        {
+          "typ": "Holz-Alu",
+          "verglasung": "3-fach Verglasung",
+          "uw_wert": 0.95,
+          "hoehe_m": 1.4,
+          "breite_m": 1.5,
+          "flaeche_m2": 2.1,
+          "beschreibung": "Fenster Süd"
+        }
+      ]
+    },
+    {
+      "id": "og-kinderzimmer",
+      "stockwerk": "Obergeschoss",
+      "raumbezeichnung": "Kinderzimmer",
+      "raumnutzung": "Wohnen",
+      "raumgroesse_m2": 18.5,
+      "raumhoehe_m": 2.4,
+      "norm_innentemperatur_c": 21,
+      "berechneteHeizlast": 750,
+      "heizkoerper": [
+        {
+          "Art": "Flachheizkörper",
+          "typ": "Typ 22",
+          "breite": 1400,
+          "hoehe": 600,
+          "leistungAuslegung": 780,
+          "ventilvoreinstellung": 4
+        }
+      ],
+      "waende": [
+        {
+          "bezeichnung": "Außenwand West",
+          "typ": "Außenwand",
+          "flaeche": 9.5,
+          "uWert": 0.28
+        },
+        {
+          "bezeichnung": "Dachschräge",
+          "typ": "Dach",
+          "flaeche": 7.2,
+          "uWert": 0.20
+        }
+      ],
+      "fenster": [
+        {
+          "typ": "Holz-Alu",
+          "verglasung": "3-fach Verglasung",
+          "uw_wert": 0.95,
+          "hoehe_m": 1.4,
+          "breite_m": 1.2,
+          "flaeche_m2": 1.68,
+          "beschreibung": "Fenster West"
+        }
+      ]
+    }
+  ],
+  "unbeheizteBereiche": [
+    {
+      "bezeichnung": "Keller",
+      "typ": "Keller",
+      "flaeche": 65.0,
+      "temperatur": 10
+    },
+    {
+      "bezeichnung": "Dachboden",
+      "typ": "Dachboden",
+      "flaeche": 45.0,
+      "temperatur": 5
+    }
+  ],
+  "dokumentation": {
+    "ersteller": "Beispiel Heizungsbau GmbH",
+    "datum": "2024-01-15",
+    "pruefung": {
+      "durchgefuehrt": true,
+      "datum": "2024-01-15",
+      "pruefer": "Ing. Schmidt"
+    }
+  }
+}

@@ -1,0 +1,634 @@
+/* Copy of the CSS from css/styles.css */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header-actions {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.sidebar {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+}
+
+.room-item {
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.room-item:hover {
+    background-color: #f0f0f0;
+}
+
+.room-item.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.room-item.active .text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.room-item .delete-icon {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.room-item:hover .delete-icon {
+    opacity: 1;
+}
+
+.content-area {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    min-height: calc(100vh - 140px);
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+}
+
+.view-toggle-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dee2e6;
+    background: white;
+    color: #6c757d;
+    transition: all 0.2s;
+}
+
+.view-toggle-btn:hover {
+    background: #f8f9fa;
+    color: #495057;
+}
+
+.view-toggle-btn.active {
+    background: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.no-data-message {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    margin: 20px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.no-data-message:hover {
+    background-color: #f8f9fa;
+    border-color: #007bff;
+}
+
+.no-data-message.drag-over {
+    background-color: #e7f3ff;
+    border-color: #007bff;
+    border-width: 3px;
+}
+
+.form-section {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+}
+
+.form-section h5 {
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 8px;
+}
+
+.array-item {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    position: relative;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: #dc3545;
+}
+
+.table-hover tbody tr {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.modal-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.info-group {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.info-group h6 {
+    color: #007bff;
+    margin-bottom: 15px;
+    font-weight: 600;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 500;
+    color: #6c757d;
+}
+
+.info-value {
+    font-weight: 400;
+    color: #212529;
+}
+
+.temp-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.temp-cold {
+    background-color: #cfe2ff;
+    color: #084298;
+}
+
+.temp-normal {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.temp-warm {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.loading-spinner {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.loading-spinner.active {
+    display: block;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.add-btn {
+    cursor: pointer;
+    color: #007bff;
+    transition: color 0.2s;
+}
+
+.add-btn:hover {
+    color: #0056b3;
+}
+
+/* Nested objects for room editor */
+.nested-object {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.nested-object h6 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #495057;
+}
+
+/* Room editor styles */
+.room-editor h4 {
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+/* Print Report Styles */
+.print-report {
+    display: none;
+    background: white;
+    padding: 20px;
+    max-width: 210mm;
+    margin: 0 auto;
+}
+
+.print-header {
+    border-bottom: 3px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.print-header h1 {
+    font-size: 24px;
+    margin: 0 0 10px 0;
+}
+
+.print-header .info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+}
+
+.print-summary {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.print-summary h2 {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+}
+
+.print-floor-section {
+    margin-bottom: 30px;
+    page-break-inside: avoid;
+}
+
+.print-floor-section h3 {
+    background: #e9ecef;
+    padding: 8px 15px;
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    border-left: 4px solid #007bff;
+}
+
+.print-room {
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    margin-bottom: 15px;
+    page-break-inside: avoid;
+}
+
+.print-room h4 {
+    font-size: 14px;
+    margin: 0 0 10px 0;
+    color: #007bff;
+}
+
+.print-room-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.print-room-info {
+    font-size: 13px;
+}
+
+.print-room-info strong {
+    display: inline-block;
+    min-width: 120px;
+    color: #495057;
+}
+
+.print-room-details {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e9ecef;
+    font-size: 12px;
+}
+
+.print-room-details h5 {
+    font-size: 13px;
+    margin: 10px 0 5px 0;
+    color: #6c757d;
+}
+
+.print-room-details ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* Print table styles for reference document */
+.print-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.print-table th,
+.print-table td {
+    border: 1px solid #dee2e6;
+    padding: 6px 8px;
+    text-align: left;
+}
+
+.print-table thead {
+    background-color: #f8f9fa;
+}
+
+.print-table th {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.print-table td {
+    font-size: 11px;
+}
+
+.print-table-total {
+    background-color: #e9ecef;
+    font-weight: 600;
+}
+
+.print-section {
+    margin-bottom: 15px;
+}
+
+.print-section h4 {
+    font-size: 13px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Print Media Queries */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        background: white;
+        font-size: 9pt;
+        color: #000;
+    }
+
+    /* Hide print preview UI elements */
+    .d-print-none,
+    .print-close-btn,
+    .print-info-banner {
+        display: none !important;
+    }
+
+    .main-container {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Hide everything except print report */
+    .header-actions,
+    .sidebar,
+    .content-area,
+    .modal,
+    .modal-backdrop,
+    #app > .row {
+        display: none !important;
+    }
+
+    /* Show only print report */
+    .print-report {
+        display: block !important;
+        padding: 10mm 15mm;
+        margin: 0;
+        max-width: none;
+    }
+
+    .print-header {
+        margin-bottom: 15px;
+        border-bottom: 3px solid #000;
+        padding-bottom: 10px;
+    }
+
+    .print-header h1 {
+        font-size: 16pt;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .print-summary {
+        background-color: #f0f0f0 !important;
+        border: 1px solid #000;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .print-summary h2 {
+        font-size: 13pt;
+        margin-bottom: 10px;
+    }
+
+    .print-summary h3 {
+        font-size: 11pt;
+        margin-top: 15px;
+        margin-bottom: 8px;
+        border-bottom: 1px solid #666;
+    }
+
+    .page-break-before {
+        page-break-before: always;
+    }
+
+    .print-floor-section {
+        margin-bottom: 20px;
+    }
+
+    .print-floor-section h2 {
+        font-size: 12pt;
+        background-color: #333 !important;
+        color: white !important;
+        padding: 8px;
+        margin-bottom: 10px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .print-room {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #666;
+        page-break-inside: avoid;
+    }
+
+    .print-room h3 {
+        font-size: 11pt;
+        font-weight: bold;
+        background-color: #e0e0e0 !important;
+        padding: 5px;
+        border-left: 4px solid #333;
+        margin-bottom: 10px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .print-section h4 {
+        font-size: 10pt;
+        font-weight: bold;
+        border-bottom: 1px solid #999;
+        padding-bottom: 2px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .print-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8pt;
+        margin-bottom: 8px;
+    }
+
+    .print-table thead {
+        background-color: #e0e0e0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .print-table th {
+        border: 1px solid #666;
+        padding: 4px 6px;
+        text-align: left;
+        font-weight: bold;
+        font-size: 8pt;
+    }
+
+    .print-table td {
+        border: 1px solid #999;
+        padding: 3px 6px;
+        vertical-align: top;
+    }
+
+    .print-table-total {
+        background-color: #d0d0d0 !important;
+        font-weight: bold;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 2px 6px;
+        font-size: 7pt;
+        font-weight: bold;
+        border: 1px solid #333;
+        border-radius: 3px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .badge.bg-success {
+        background-color: #d4edda !important;
+        color: #155724 !important;
+    }
+
+    .badge.bg-info {
+        background-color: #d1ecf1 !important;
+        color: #0c5460 !important;
+    }
+
+    .badge.bg-warning {
+        background-color: #fff3cd !important;
+        color: #856404 !important;
+    }
+
+    .badge.bg-danger {
+        background-color: #f8d7da !important;
+        color: #721c24 !important;
+    }
+
+    .print-footer {
+        margin-top: 30px;
+        padding-top: 10px;
+        border-top: 1px solid #666;
+        text-align: center;
+        font-size: 8pt;
+        color: #666;
+    }
+
+    /* Ensure room data doesn't break across pages */
+    .print-room,
+    .print-section,
+    .print-table {
+        page-break-inside: avoid;
+    }
+
+    /* Force new page for each floor */
+    .print-floor-section {
+        page-break-inside: avoid;
+    }
+
+    /* First floor doesn't need page break */
+    .print-floor-section:first-of-type {
+        page-break-before: auto;
+    }
+
+    /* Remove any shadows or decorative elements */
+    * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    /* Add page numbers */
+    @page {
+        margin: 10mm 15mm;
+        @bottom-center {
+            content: counter(page);
+        }
+    }
+}

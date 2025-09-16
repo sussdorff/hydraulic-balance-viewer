@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydraulischer Abgleich - Datenübersicht</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <!-- Vue.js 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app" class="main-container">
+        <!-- Header with Actions -->
+        <div class="header-actions">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h3 class="mb-0">
+                        <i class="bi bi-house-door"></i> Hydraulischer Abgleich - Datenübersicht
+                    </h3>
+                </div>
+                <div class="col-md-6 text-end d-flex align-items-center justify-content-end">
+                    <!-- View Toggle Icons -->
+                    <div class="btn-group me-3" role="group">
+                        <button class="btn view-toggle-btn"
+                                :class="{ active: currentView === 'detail' }"
+                                @click="switchView('detail')"
+                                title="Detailansicht"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="bottom">
+                            <i class="bi bi-card-text fs-5"></i>
+                        </button>
+                        <button class="btn view-toggle-btn"
+                                :class="{ active: currentView === 'table' }"
+                                @click="switchView('table')"
+                                title="Tabellenansicht"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="bottom">
+                            <i class="bi bi-table fs-5"></i>
+                        </button>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <button class="btn btn-primary me-2" @click="$refs.fileInput.click()">
+                        <i class="bi bi-upload"></i> JSON hochladen
+                    </button>
+                    <button class="btn btn-success me-2"
+                            @click="exportJSON"
+                            :disabled="!buildingData">
+                        <i class="bi bi-download"></i> JSON exportieren
+                    </button>
+                    <button class="btn btn-secondary"
+                            @click="generatePrintReport"
+                            :disabled="!buildingData">
+                        <i class="bi bi-printer"></i> Druckvorschau
+                    </button>
+
+                    <!-- Hidden file input -->
+                    <input type="file" ref="fileInput" accept=".json" style="display: none;" @change="handleFileUpload">
+                </div>
+            </div>
+        </div>
+
+        <!-- Table View (DEFAULT) -->
+        <div v-show="currentView === 'table'" class="row">
+            <div class="col-12">
+                <div class="content-area">
+                    <div v-if="!buildingData"
+                         class="no-data-message"
+                         :class="{ 'drag-over': isDragging }"
+                         @drop="handleDrop"
+                         @dragover="handleDragOver"
+                         @dragleave="handleDragLeave"
+                         @click="$refs.fileInput.click()">
+                        <i class="bi bi-cloud-arrow-up" style="font-size: 48px; color: #007bff;"></i>
+                        <p class="mt-3"><strong>JSON-Datei laden</strong></p>
+                        <p class="small">Klicken Sie hier oder ziehen Sie die Datei in diesen Bereich</p>
+                        <p class="small text-muted">Unterstützt: hydraulischer-abgleich-daten.json</p>
+                    </div>
+
+                    <div v-else>
+                        <h4>Raumübersicht - Tabellenansicht</h4>
+
+                        <!-- Room Table Component -->
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th @click="sortTable('stockwerk')" class="cursor-pointer">
+                                            Stockwerk <i class="bi bi-arrow-down-up"></i>
+                                        </th>
+                                        <th @click="sortTable('raumbezeichnung')" class="cursor-pointer">
+                                            Raum <i class="bi bi-arrow-down-up"></i>
+                                        </th>
+                                        <th @click="sortTable('raumnutzung')" class="cursor-pointer">
+                                            Nutzung <i class="bi bi-arrow-down-up"></i>
+                                        </th>
+                                        <th @click="sortTable('raumgroesse_m2')" class="cursor-pointer">
+                                            Fläche (m²) <i class="bi bi-arrow-down-up"></i>
+                                        </th>
+                                        <th @click="sortTable('norm_innentemperatur_c')" class="cursor-pointer">
+                                            Temp (°C) <i class="bi bi-arrow-down-up"></i>
+                                        </th>
+                                        <th>Aktionen</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(room, index) in sortedRooms"
+                                        :key="index"
+                                        @click="showRoomDetails(room, index)"
+                                        style="cursor: pointer;">
+                                        <td>{{ utils.getFloorAbbreviation(room.stockwerk) }}</td>
+                                        <td><strong>{{ room.raumbezeichnung }}</strong></td>
+                                        <td>{{ room.raumnutzung || '-' }}</td>
+                                        <td class="text-end">{{ room.raumgroesse_m2 || 0 }}</td>
+                                        <td class="text-center">{{ room.norm_innentemperatur_c || 0 }}</td>
+                                        <td @click.stop>
+                                            <button class="btn btn-sm btn-outline-primary me-1"
+                                                    @click="editRoom(index)"
+                                                    title="Bearbeiten">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger"
+                                                    @click="deleteRoom(index)"
+                                                    title="Löschen">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail View -->
+        <div v-show="currentView === 'detail'" class="row">
+            <!-- Left Sidebar -->
+            <div class="col-md-4">
+                <room-sidebar
+                    :building-data="buildingData"
+                    :current-edit-room-index="currentEditRoomIndex"
+                    @select-room="selectRoomForEdit"
+                    @add-room="addRoom"
+                    @delete-room="deleteRoom">
+                </room-sidebar>
+            </div>
+
+            <!-- Right Content Area -->
+            <div class="col-md-8">
+                <div class="content-area">
+                    <room-editor
+                        v-if="currentEditRoomIndex !== null && buildingData?.raeume?.[currentEditRoomIndex]"
+                        :room="buildingData.raeume[currentEditRoomIndex]"
+                        :room-index="currentEditRoomIndex"
+                        :all-rooms="buildingData?.raeume || []"
+                        @update-room="updateRoom">
+                    </room-editor>
+                    <div v-else class="no-data-message">
+                        <i class="bi bi-door-open" style="font-size: 48px; color: #6c757d;"></i>
+                        <p class="mt-3">Wählen Sie einen Raum aus</p>
+                        <p class="small">Die Details werden hier angezeigt</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Room Details Modal with Heat Load Calculations -->
+        <room-modal-enhanced
+            :room="selectedRoom"
+            :show="showModal"
+            :building-params="buildingData?.gebaeude?.rahmenbedingungen_heizlast"
+            @close="closeModal">
+        </room-modal-enhanced>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- App Script -->
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
