@@ -32,3 +32,6 @@ hydraulischer-abgleich-daten*.json
 
 # Playwright MCP
 .playwright-mcp/
+
+# Test results
+test-results/
